@@ -12,11 +12,25 @@
 }
 
 body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 	line-height: 1.6;
-	background-color: #f4f4f4;
-	color: #333;
-	transition: background-color 0.3s ease, color 0.3s ease;
+    height: 100vh;
+    margin: 0;
+    transition: background 0.5s ease, color 0.3s ease; /* Smooth transition for background on mode change */
 }
+
+/* Dark mode styles */
+body.dark-mode {
+    background: linear-gradient(135deg, #333, #666); /* Darker gradient for dark mode */
+}
+
+body.dark-mode .clock-container {
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+    color: rgba(255, 255, 255, 0.70);
+}
+
 
 /* Container styles */
 .container {
@@ -43,14 +57,16 @@ header h1 {
 header .label,
 header .toggle-container {
 	display: inline-block;
-	width: 18%;
+	width: 20%;
 	position: absolute;
 	top: 0;
 	right: 0;
 	font-weight: bold;
-	margin: 1.5% 0;
+	margin: 1% 0;
 	font-size: 0.8rem;
 	text-align: right;
+	padding: 0 1%;
+	line-height: 2em;
 }
 
 /* Main section styles */
@@ -518,4 +534,45 @@ footer p,
 footer strong,
 footer code {
 	line-height: 3rem;
+}
+
+/* Clock */
+.clock-container {
+    text-align: center;
+    font-family: "Protest Strike", serif;
+    font-size: 1rem; /* Font size */
+    font-weight: bolder;
+    background: linear-gradient(0deg, #4a90e2, #50e3c2); /* Smooth gradient background */
+    color: transparent; /* Make color transparent for gradient effect */
+    -webkit-background-clip: text; /* Clip background to text */
+    background-clip: text;
+    animation: gradient 3s ease infinite; /* Smooth animation for gradient */
+	text-align: left;
+	padding: 1%;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.floating {
+    display: inline-block;
+    animation: float 3s ease-in-out infinite; /* Floating animation */
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
 }

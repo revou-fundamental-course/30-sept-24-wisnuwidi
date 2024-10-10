@@ -185,6 +185,14 @@ buttonsElm.forEach(buttonsElm => buttonsBox.appendChild(buttonsElm));
 // Create Toggle Elements
 const headerElm = createMultipleElements([
 	{
+		// Create Clock
+		tag: 'div',
+		attributes: {
+			'id'	: 'clock',
+			'class'	: 'clock-container'
+		},
+		text: ''
+	}, {
 		// Create Label [ Fahrenheit ]
 		tag: 'h1',
 		attributes: {},
@@ -394,3 +402,25 @@ toggle.addEventListener('click', () => {
     toggle.classList.toggle('active');
     body.classList.toggle('dark-mode');
 });
+
+function updateClock() {
+    const now = new Date();
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+
+    // Format date
+    const date = now.toLocaleDateString('en-GB', options);
+    
+    // Format time
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    const milliseconds = now.getMilliseconds().toString().padStart(3, '0'); // Get milliseconds
+
+    // Update clock
+    const clockElement = document.getElementById('clock');
+    clockElement.innerHTML = `${date} <span class="floating">${hours}</span>:<span class="floating">${minutes}</span>:<span class="floating">${seconds}</span>:${milliseconds}`;
+}
+
+// Update clock every 100 milliseconds
+setInterval(updateClock, 100);
+updateClock(); // Initial call to display clock immediately
