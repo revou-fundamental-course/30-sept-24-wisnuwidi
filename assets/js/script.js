@@ -107,7 +107,7 @@ const inputCalc = createMultipleElements([
 		tag: 'select',
 		attributes: {
 			'id'	: 'calcMethod',
-			'class'	: 'calc-method s-25'
+			'class'	: 'calc-method s-25 line-box'
 		},
 		text:
 			'<option value="">Pilih Konversi</option>' +
@@ -143,14 +143,14 @@ const inputConvertion = createMultipleElements([
 		attributes: {
 			'name'	: 'inputConvertion',
 			'id'	: 'inputConvertionID',
-			'class'	: 'input s-25'
+			'class'	: 'input s-25 line-box'
 		}
 	}, {
 		// Create Input [ Fahrenheit ]
 		tag: 'input',
 		attributes: {
 			'id'	: 'inputConvertionInfo',
-			'class'	: 'input s-50'
+			'class'	: 'input s-50 line-box'
 		}
 	}
 ]);
@@ -284,6 +284,7 @@ function conversionMethod(inputValue = 0) {
 				getElm('inputConvertionInfo').value = parsingToHTML('&deg;') + methodName;
 				
 				drawElementsInfo();
+				calcInput.setAttribute('class', 'input s-75');
 				convInput.value = calculation(calcInput.value);
 			}
 		});
@@ -362,7 +363,7 @@ function readEventMethodListener(value) {
 	calcInput.removeAttribute('disabled');
 	
 	if(isEmpty(value)) {
-		resetElements([calcInput, convInput]);
+		resetElements([calcInput, convInput, convInfo]);
 		disableElements([calcInput, convInput, convInfo, buttonReset, buttonReverse]);
 	} else {
 		drawElementsInfo();

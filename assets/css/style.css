@@ -107,10 +107,24 @@ section button:last-child {
 	text-align: right;
 }
 
-#inputConvertionInfo {
-	border: transparent solid 1px;
-	border-bottom: #cccccc solid 1px;
-	border-radius: 0;
+.line-box {
+	border: transparent solid 1px !important;
+	border-bottom: #cccccc solid 1px !important;
+	border-radius: 0 !important;
+}
+
+.line-box:disabled {
+	background-color: transparent !important;
+}
+
+.calc-method {
+    transition: background 0.5s ease, color 0.3s ease; /* Smooth transition for background on mode change */
+}
+
+.calc-method:focus,
+.calc-method:hover {
+	box-shadow: rgba(101, 175, 255, 0.19) -1px 8px 8px;
+	border-bottom-color: rgba(101, 175, 255, 0.38) !important;
 }
 
 /* Button styles */
