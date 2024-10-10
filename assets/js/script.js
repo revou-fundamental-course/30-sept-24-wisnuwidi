@@ -271,6 +271,7 @@ function conversionMethod(inputValue = 0) {
 				);
 				resetElements([calcInput, convInput]);
 				disableElements([buttonReset, buttonReverse]);
+				calcInput.setAttribute('class', 'input s-75 danger-info');
 
 			} else {
 				// When Input Value Is Number/Float And/Or It Was Not Empty
@@ -365,6 +366,7 @@ function readEventMethodListener(value) {
 		disableElements([calcInput, convInput, convInfo, buttonReset, buttonReverse]);
 	} else {
 		drawElementsInfo();
+		calcInput.focus();
 		return conversionMethod(calcInput.value);
 	}
 }

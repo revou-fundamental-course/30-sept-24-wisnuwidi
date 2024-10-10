@@ -30,7 +30,6 @@ body.dark-mode .clock-container {
     color: rgba(255, 255, 255, 0.70);
 }
 
-
 /* Container styles */
 .container {
 	max-width: 800px;
@@ -140,6 +139,11 @@ button {
 	margin: 10px 20px;
 }
 
+.danger-info {
+	background-color: rgba(255, 0, 0, 0.18) !important;
+	border: rgba(255, 0, 0, 0.38) solid 1px !important;
+}
+
 .close-btn {
 	font-family: "Protest Strike", sans-serif;
 	font-weight: bold;
@@ -156,6 +160,10 @@ button {
 	padding: 1%;
 	line-height: 0.38em;
 	font-size: 1.2rem;
+}
+
+input:disabled {
+	background-color: rgba(96, 139, 149, 0.09) !important;
 }
 
 #conv-box label,
