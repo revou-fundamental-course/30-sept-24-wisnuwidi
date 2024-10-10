@@ -51,7 +51,12 @@ header h1 {
 	font-weight: 400;
 	font-style: normal;
 	font-size: 3rem;
+	color: #42a2bf;
 	margin: 3% auto 8% auto;
+}
+
+body.dark-mode header h1 {
+    color: #d0e7ee; /* Darker color on hover for dark mode */
 }
 
 header .label,
