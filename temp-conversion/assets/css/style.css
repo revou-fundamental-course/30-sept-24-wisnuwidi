@@ -1,0 +1,521 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Protest+Strike&display=swap');
+
+/* Reset some default browser styles */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Nunito", sans-serif;
+	font-optical-sizing: auto;
+	font-style: normal;
+}
+
+body {
+	line-height: 1.6;
+	background-color: #f4f4f4;
+	color: #333;
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Container styles */
+.container {
+	max-width: 800px;
+	margin: 1% auto;
+	padding: 20px;
+}
+
+/* Header styles */
+header {
+	text-align: center;
+	margin-bottom: 20px;
+	position: relative;
+}
+
+header h1 {
+	font-family: "Protest Strike", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 3rem;
+	margin: 3% auto 8% auto;
+}
+
+header .label,
+header .toggle-container {
+	display: inline-block;
+	width: 18%;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-weight: bold;
+	margin: 1.5% 0;
+	font-size: 0.8rem;
+	text-align: right;
+}
+
+/* Main section styles */
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* Section styles */
+section {
+	width: 100%;
+	max-width: 600px;
+	margin: 10px 0;
+	padding: 15px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+section input,
+section button {
+	margin: 10px auto;
+}
+
+section button {
+	width: 46%;
+}
+
+section button:last-child {
+	float: right;
+}
+
+#inputConvertionID {
+	text-align: right;
+}
+
+#inputConvertionInfo {
+	border: transparent solid 1px;
+	border-bottom: #cccccc solid 1px;
+	border-radius: 0;
+}
+
+/* Button styles */
+button {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+/* Notification styles */
+#notification {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	background-color: rgba(242, 110, 30, 0.9);
+	color: white;
+	padding: 0;
+	border-radius: 5px;
+	transform: translateY(20px);
+	transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.danger {
+	margin: 10px 20px;
+}
+
+.close-btn {
+	font-family: "Protest Strike", sans-serif;
+	font-weight: bold;
+	position: absolute;
+	top: 12%;
+	right: 2%;
+	cursor: pointer;
+	color: #e10000;
+	background-color: #ffeada;
+	border-radius: 50%;
+	width: 14pt;
+	height: 14pt;
+	text-align: center;
+	padding: 1%;
+	line-height: 0.38em;
+	font-size: 1.2rem;
+}
+
+#conv-box label,
+#conv-box input {
+	margin: 0 0.5%;
+}
+
+.input {
+	font-weight: bold;
+	text-transform: capitalize;
+}
+
+.s-25 {
+	width: 25% !important;
+}
+
+.s-50 {
+	width: 50% !important;
+}
+
+.s-75 {
+	width: 73% !important;
+	margin-left: 1%;
+}
+
+@media (max-width: 600px) {
+	.s-25 {
+		width: 72% !important;
+	}
+	
+	.s-50 {
+		width: 100% !important;
+	}
+
+	.s-75 {
+		width: 100% !important;
+	}
+}
+
+@media (max-width: 508px) {
+	.s-25,
+	.s-50 {
+		width: 100% !important;
+	}
+}
+
+/* Show notification */
+.show {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Dark mode styles */
+body.dark-mode {
+	background-color: #333;
+	color: #f4f4f4;
+}
+
+body.dark-mode section {
+	background-color: #444;
+	color: #f4f4f4;
+}
+
+body.dark-mode button {
+	background-color: #555;
+	color: #f4f4f4;
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
+.toggle {
+    position: relative;
+    width: 50px; /* Width of the toggle */
+    height: 25px; /* Height of the toggle */
+    background-color: #ccc; /* Default background color */
+    border-radius: 25px; /* Round edges */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background-color 0.3s; /* Smooth background transition */
+}
+
+.toggle::before {
+    content: '';
+    position: absolute;
+    width: 20px; /* Width of the toggle indicator */
+    height: 20px; /* Height of the toggle indicator */
+    background-color: white; /* Background color of the indicator */
+    border-radius: 50%; /* Round edges */
+    top: 2.5px; /* Position it in the center vertically */
+    left: 2.5px; /* Position it to the left */
+    transition: transform 0.3s; /* Smooth transition for movement */
+}
+
+/* Active state of toggle */
+.toggle.active {
+    background-color: #4caf50; /* Change background color when active */
+}
+
+.toggle.active::before {
+    transform: translateX(25px); /* Move the indicator to the right */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+	.label.input-label {
+		display: none;
+	}
+    .toggle {
+        width: 42px; /* Increase width on smaller screens */
+        height: 17px; /* Increase height on smaller screens */
+    }
+
+    .toggle::before {
+        width: 10px; /* Increase width of indicator */
+        height: 10px; /* Increase height of indicator */
+    }
+}
+
+/* Dark mode toggle switch */
+.toggle.active {
+	background-color: #4caf50;
+}
+
+.toggle.active::before {
+	transform: translateX(25px);
+}
+
+/* Responsive styles */
+@media ( max-width : 768px) {
+	section {
+		max-width: 90%;
+	}
+	button {
+		width: 100%;
+	}
+}
+
+:root {
+    --marker-color-light: #b8daff; /* Marker color for light mode */
+    --marker-color-dark: #66b3ff;  /* Marker color for dark mode */
+}
+
+/* Apply Summary and the marker styles */
+summary {
+	position: relative;
+	left: -2.8%;
+}
+
+summary:hover {
+	cursor: pointer;
+}
+
+summary > strong {
+	margin: 0 0 0 3px;
+}
+
+summary::marker {
+    content: '▶'; /* Custom marker symbol */
+    color: var(--marker-color-light); /* Default color for light mode */
+    font-size: 1.2em; /* Size of the marker */
+    margin-right: 5px; /* Space between the marker and the summary text */
+}
+
+/* Dark mode styles */
+body.dark-mode summary::marker {
+    color: var(--marker-color-dark); /* Color for dark mode */
+}
+
+/* Optional: Change marker on hover */
+summary:hover::marker {
+    color: #0056b3; /* Darker color on hover for light mode */
+}
+
+/* Dark mode hover effect */
+body.dark-mode summary:hover::marker {
+    color: #004494; /* Darker color on hover for dark mode */
+}
+
+/* Button Styles */
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+/* Disabled Button Styles */
+.button:disabled {
+    cursor: not-allowed; /* Change cursor to indicate the button is not clickable */
+    opacity: 0.6; /* Make the button less opaque to indicate it's disabled */
+}
+
+/* Light Mode Disabled Button Styles */
+body:not(.dark-mode) .button:disabled {
+    background-color: #007bff; /* Same background color as enabled */
+    color: rgba(255, 255, 255, 0.5); /* Lighter text to indicate disabled state */
+    border: 1px solid #0056b3; /* Slightly darker border color */
+}
+
+/* Dark Mode Disabled Button Styles */
+body.dark-mode .button:disabled {
+    background-color: #495057; /* Same background color as enabled */
+    color: rgba(248, 249, 250, 0.5); /* Lighter text for contrast in dark mode */
+    border: 1px solid #343a40; /* Slightly darker border color */
+}
+
+/* Light Mode Button Styles */
+body:not(.dark-mode) .button {
+    background-color: #007bff; /* Primary button color */
+    color: white;
+}
+
+body:not(.dark-mode) .button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Dark Mode Button Styles */
+body.dark-mode .button {
+    background-color: #495057; /* Darker button color */
+    color: #f8f9fa; /* Light text for contrast */
+}
+
+body.dark-mode .button:hover {
+    background-color: #343a40; /* Darker shade on hover */
+}
+
+/* Input and Select Styles */
+.input,
+.calc-method {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+/* Light Mode Input Styles */
+body:not(.dark-mode) .input,
+body:not(.dark-mode) .calc-method {
+    background-color: white;
+    color: #333;
+}
+
+/* Dark Mode Input Styles */
+body.dark-mode .input,
+body.dark-mode .calc-method {
+    background-color: #444; /* Darker background for inputs */
+    color: #f8f9fa; /* Light text for contrast */
+    border: 1px solid #666; /* Darker border color */
+}
+
+select:hover {
+	cursor: pointer;
+}
+
+/* Focus Styles for Inputs */
+.input:focus,
+.calc-method:focus {
+    outline: none;
+    border-color: #007bff; /* Border color on focus */
+}
+
+/* Dark Mode Focus Styles for Inputs */
+body.dark-mode .input:focus,
+body.dark-mode .calc-method:focus {
+    border-color: #66afe9; /* Lighter blue on focus */
+}
+
+/* Article Information Styles */
+#info-box {
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: inline-table;
+    width: 100%;
+    margin-top: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#info-box h3,
+#info-box details {
+    margin: 20px;
+}
+
+#info-box p.info{
+    margin: 20px !important;
+}
+
+#info-box p {
+    margin: 20px auto;
+}
+
+/* Light Mode Styles */
+body:not(.dark-mode) #info-box {
+    background: linear-gradient(135deg, #007bff 0%, #6c757d 100%);
+    color: white;
+}
+
+/* Dark Mode Styles */
+body.dark-mode #info-box {
+    background: linear-gradient(135deg, #343a40 0%, #495057 100%);
+    color: #f8f9fa; /* Lighter text for better contrast */
+}
+
+#info-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+#info-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.info {
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+/* Details Styles */
+#info-notes {
+    margin-top: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px 30px;
+    border-radius: 5px;
+}
+
+/* Dark Mode Details Styles */
+body.dark-mode #info-notes {
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly darker for dark mode */
+}
+/* Code Block Styles */
+code {
+    font-family: 'Courier New', Courier, monospace; /* Monospaced font for code */
+    background-color: rgba(200, 200, 200, 0.2); /* Light, visible background for light mode */
+    color: #c7254e; /* Color for strings, more distinct in light mode */
+    margin: 10px auto 5px auto;
+    padding: 0.8% 1%;
+    border-radius: 3px;
+}
+
+/* Specific styles for inline code */
+code.inline {
+    background-color: rgba(0, 0, 0, 0.1); /* Slightly more distinct background */
+    color: #d19a66; /* Different color for inline code */
+}
+
+@media (max-width: 768px) {
+    code {
+        display: block; /* Make the code block a block element */
+        width: 100%; /* Set width to 100% */
+        padding: 10px; /* Add some padding for better readability */
+        background-color: #f6f8fa; /* Background color for visibility */
+        border-radius: 5px; /* Rounded corners */
+        overflow-x: auto; /* Enable horizontal scrolling if code is too long */
+    }
+}
+
+/* Dark Mode Adjustments */
+body.dark-mode code {
+    background-color: rgba(50, 50, 50, 0.7); /* Darker background for inline code in dark mode */
+    color: #61afef; /* Brighter syntax highlighting for dark mode */
+}
+
+body.dark-mode pre {
+    background-color: #21252b; /* Darker background for preformatted text */
+    color: #abb2bf; /* Syntax highlight color for dark mode */
+    border: 1px solid #444; /* Darker border for dark mode */
+}
+
+/* Set line height for footer childs */
+footer h3,
+footer p,
+footer strong,
+footer code {
+	line-height: 3rem;
+}
