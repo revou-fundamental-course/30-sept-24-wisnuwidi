@@ -39,6 +39,17 @@ function resetElements(elements) {
 	elmIterates(elements, resetValue);
 }
 
+// Create Action For Hide/Display Element(s)
+function action(action_name, elements) {
+	if (elements.length >= 1) {
+		elmIterates(elements, (elm) =>{
+			elm.setAttribute('class', action_name);
+		});
+	} else {
+		elements.setAttribute('class', action_name);
+	}
+}
+
 // Calculation By Method
 function calculation(input) {
 	var resultData;
@@ -126,10 +137,10 @@ const inputCalc = createMultipleElements([
 // Draw Calculation Box
 inputCalc.forEach(inputCalc => calcBox.appendChild(inputCalc));
 
-// Create Input Elements (Right Box)
+// Create Input Elements
 const inputConvertion = createMultipleElements([
 	{
-		// Create Label [ Fahrenheit ]
+		// Create Label Conversion
 		tag: 'label',
 		attributes: {
 			'for'	: 'inputConvertionID',
@@ -138,7 +149,7 @@ const inputConvertion = createMultipleElements([
 		},
 		text: 'Hasil Konversi'
 	}, {
-		// Create Input [ Fahrenheit ]
+		// Create Input Conversion
 		tag: 'input',
 		attributes: {
 			'name'	: 'inputConvertion',
@@ -146,7 +157,7 @@ const inputConvertion = createMultipleElements([
 			'class'	: 'input s-25 line-box'
 		}
 	}, {
-		// Create Input [ Fahrenheit ]
+		// Create Input Conversion Info
 		tag: 'input',
 		attributes: {
 			'id'	: 'inputConvertionInfo',
@@ -154,7 +165,7 @@ const inputConvertion = createMultipleElements([
 		}
 	}
 ]);
-// Draw Label & InputBox [ Fahrenheit ]
+// Draw Label & InputBox
 inputConvertion.forEach(inputConvertion => convertionBox.appendChild(inputConvertion));
 
 // Create Button Elements
@@ -193,12 +204,12 @@ const headerElm = createMultipleElements([
 		},
 		text: ''
 	}, {
-		// Create Label [ Fahrenheit ]
+		// Create Title
 		tag: 'h1',
 		attributes: {},
 		text: 'Konversi Suhu'
 	}, {
-		// Create Label [ Fahrenheit ]
+		// Create Toggle Switch Mode
 		tag: 'label',
 		attributes: {
 			'for'	: 'toggleBox',
@@ -206,7 +217,7 @@ const headerElm = createMultipleElements([
 		},
 		text: 'Switch Mode'
 	}, {
-		// Create Reset Button
+		// Create Toggle Box
 		tag: 'div',
 		attributes: {
 			'id'	: 'toggleContainer',
@@ -233,13 +244,16 @@ buttonReset.addEventListener('click', () => {
 	getElm('info-box').innerHTML = '';
 	resetElements([getElm('calcMethod'), calcInput, convInput, convInfo]);
 	disableElements([calcInput, convInput, convInfo, buttonReset, buttonReverse]);
+	action('hide', [getElm('conv-box'), getElm('button-box')]);
 });
 
 // Set Action Buttons When On-Load Windows
 window.onload = () => {
 	disableElements([calcInput, convInput, convInfo, buttonReset, buttonReverse]);
+	action('hide', [getElm('conv-box'), getElm('button-box')]);
 }
 
+// Function Create Notification Alert
 function notif(alert = '') {
 	return notification.innerHTML = alert;
 }
@@ -269,15 +283,19 @@ function conversionMethod(inputValue = 0) {
 					'Ups, Data Harus Diisi Dan Wajib Berupa Angka Atau Desimal!' +
 					'</div>'
 				);
+				
+				action('animate__animated animate__flash', getElm('notification'));
 				resetElements([calcInput, convInput]);
 				disableElements([buttonReset, buttonReverse]);
-				calcInput.setAttribute('class', 'input s-75 danger-info');
+				calcInput.setAttribute('class', 'input s-75 danger-info animate__animated animate__shakeX');
 
 			} else {
 				// When Input Value Is Number/Float And/Or It Was Not Empty
+				action('animate__animated animate__fadeOut', getElm('notification'));
 				notif();
 				buttonReset.removeAttribute('disabled');
 				buttonReverse.removeAttribute('disabled');
+				action('show animate__animated animate__bounceInUp', [getElm('button-box'), getElm('info-box')]);
 				
 				methodName = 'celcius';
 				if ('celcius' === getElm('calcMethod').value) methodName = 'fahrenheit';
@@ -342,20 +360,25 @@ function drawElementsInfo() {
 		if ('fahrenheit' === getMethodName) methodNameInfo	= '<u>Konversi Fahrenheit Ke Celcius</u>';
 		
 		let textInfo		= 'Info Kalkulasi: ' + methodNameInfo;
-		let textInfoNotes	= '<summary><strong>Keterangan:</strong></summary>' + 
+		let textInfoNotes	= '<summary onclick="actionNoteInfo(this)"><strong>Keterangan:</strong></summary>' + 
 			'Suhu S dalam derajat Fahrenheit (&deg;F) sama dengan suhu S dalam derajat Celcius (&deg;C) kali 9/5 tambah 32.' + 
 			'<p><code>S(&deg;F) = (S(&deg;C) x 9/5) + 32</code> atau <code>S(&deg;F) = (S(&deg;C) x 1,8) + 32</code></p>'
 		;
 		
 		if ('fahrenheit' === getMethodName) {
-			textInfoNotes	= '<summary><strong>Keterangan:</strong></summary>' + 
+			textInfoNotes	= '<summary onclick="actionNoteInfo(this)"><strong>Keterangan:</strong></summary>' + 
 				'Suhu S dalam derajat Celcius (&deg;C) sama dengan suhu S dalam derajat Fahrenheit (&deg;F) kurang 32 kali 5/9.'			+ 
 				'<p><code>S(&deg;C) = (S(&deg;F) - 32) x 5/9</code> atau <code>S(&deg;C) = (S(&deg;F) - 32 ) x 1,8</code></p>'
 			;
 		}
 		
-		return infoElements(textInfoValue, textInfoNotes, textInfo);
+		infoElements(textInfoValue, textInfoNotes, textInfo);
 	}
+}
+
+function actionNoteInfo(e) {
+	action('info animate__animated animate__fadeInDown', getElm('info-notes'));
+	if (null != getElm('info-notes').getAttribute('open')) getElm('info-notes').removeAttribute('class');
 }
 
 // Calculation Method For Event Method Listener
@@ -364,11 +387,15 @@ function readEventMethodListener(value) {
 	
 	if(isEmpty(value)) {
 		resetElements([calcInput, convInput, convInfo]);
+		action('hide animate__animated animate__bounceInUp', [getElm('conv-box'), getElm('button-box')]);
 		disableElements([calcInput, convInput, convInfo, buttonReset, buttonReverse]);
+		
 	} else {
 		drawElementsInfo();
 		calcInput.focus();
-		return conversionMethod(calcInput.value);
+		action('show animate__animated animate__bounceInUp', getElm('conv-box'));
+		
+		conversionMethod(calcInput.value);
 	}
 }
 
@@ -400,12 +427,14 @@ buttonReverse.addEventListener('click', () => {
 const toggle	= document.querySelector('.toggle');
 const body		= document.body;
 
-// Function to toggle dark mode
+// Event Listener For Design Mode
 toggle.addEventListener('click', () => {
     toggle.classList.toggle('active');
     body.classList.toggle('dark-mode');
 });
 
+
+// Function Clock
 function updateClock() {
     const now = new Date();
     const options = { day: 'numeric', month: 'long', year: 'numeric' };

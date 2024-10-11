@@ -190,6 +190,14 @@ input:disabled {
 	text-transform: capitalize;
 }
 
+.hide {
+	display: none;
+}
+
+.show {
+	display: block;
+}
+
 .s-25 {
 	width: 25% !important;
 }
