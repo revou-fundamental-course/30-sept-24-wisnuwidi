@@ -26,7 +26,7 @@ body.dark-mode {
 }
 
 body.dark-mode .clock-container {
-    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(77, 75, 75, 0.45));
     color: rgba(255, 255, 255, 0.70);
 }
 
@@ -63,11 +63,14 @@ header .toggle-container {
 	width: 20%;
 	position: absolute;
 	top: 0;
-	right: 0;
-	font-weight: bold;
-	margin: 1% 0;
+	right: 1%;
+	font-family: "Protest Strike", serif;
 	font-size: 0.8rem;
+	font-weight: light;
+	color: rgba(49, 119, 113, 0.84);
 	text-align: right;
+	text-shadow: rgba(66, 162, 191, 0.38) 0px 0px 2px;
+	margin: 1% 0;
 	padding: 0 1%;
 	line-height: 2em;
 }
@@ -174,6 +177,29 @@ button {
 	padding: 1%;
 	line-height: 0.38em;
 	font-size: 1.2rem;
+}
+
+#copy,
+#copy > a {
+	text-align: right;
+	font-family: "Protest Strike", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 0.8rem;
+	color: rgba(49, 119, 113, 0.84);
+	margin: 5% auto 2% auto;
+	text-shadow: rgba(66, 162, 191, 0.38) 0px 0px 2px;
+	width: 78%;
+}
+
+
+body.dark-mode header .clock-container,
+body.dark-mode header .label,
+body.dark-mode header .toggle-container,
+body.dark-mode #copy,
+body.dark-mode #copy > a {
+	color: rgba(208, 231, 238, 0.61);
+	text-shadow: rgba(19, 53, 50, 0.38) 0px 0px 0px;
 }
 
 input:disabled {
@@ -574,15 +600,16 @@ footer code {
 .clock-container {
     text-align: center;
     font-family: "Protest Strike", serif;
-    font-size: 1rem; /* Font size */
-    font-weight: bolder;
+    font-size: 0.88rem; /* Font size */
+    font-weight: lighter;
+    border-radius: 4px;
     background: linear-gradient(0deg, #4a90e2, #50e3c2); /* Smooth gradient background */
     color: transparent; /* Make color transparent for gradient effect */
     -webkit-background-clip: text; /* Clip background to text */
     background-clip: text;
     animation: gradient 3s ease infinite; /* Smooth animation for gradient */
 	text-align: left;
-	padding: 1%;
+	padding: 1% 2%;
 }
 
 @keyframes gradient {

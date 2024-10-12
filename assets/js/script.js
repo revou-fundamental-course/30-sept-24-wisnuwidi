@@ -104,6 +104,20 @@ function createMultipleElements(elements) {
 	return elements.map(({ tag, attributes, text }) => createNewElement(tag, attributes, text));
 }
 
+// Function to insert a new element after an existing element
+function insertNewElement(existingElementId, newElement) {
+    // Get the existing element by its ID
+    const existingElement = getElm(existingElementId);
+    
+    // Check if the existing element exists
+    if (existingElement) {
+        // Insert the new element after the existing element
+        existingElement.insertAdjacentElement('afterend', newElement);
+    } else {
+        console.error('Element with ID ' + existingElementId + ' not found.');
+    }
+}
+
 // Create Const Variable From Document
 const headerBox		= getElm('header-box');
 const calcBox		= getElm('calc-box');
@@ -213,7 +227,7 @@ const headerElm = createMultipleElements([
 		tag: 'label',
 		attributes: {
 			'for'	: 'toggleBox',
-			'class'	: 'label input-label'
+			'class'	: 'label switch-label'
 		},
 		text: 'Switch Mode'
 	}, {
@@ -228,6 +242,16 @@ const headerElm = createMultipleElements([
 ]);
 // Draw Buttons
 headerElm.forEach(headerElm => headerBox.appendChild(headerElm));
+
+// Select the toggle switch
+const toggle	= document.querySelector('.toggle');
+const body		= document.body;
+
+// Event Listener For Design Mode
+toggle.addEventListener('click', () => {
+    toggle.classList.toggle('active');
+    body.classList.toggle('dark-mode');
+});
 
 // Identifiers Variable
 let calcInput		= getElm('inputCalcID');
@@ -423,36 +447,79 @@ buttonReverse.addEventListener('click', () => {
 	readEventMethodListener(setMethod);
 });
 
-// Select the toggle switch
-const toggle	= document.querySelector('.toggle');
-const body		= document.body;
+// Function Get Date
+function getDate(format) {
+	const now = new Date();
+	const weekday = ["Ahad","Senin","Selasa","Rabu","Kamis","Jum'at","Sabtu"];
+	const month = now.toLocaleDateString('default', {month: 'long'});
 
-// Event Listener For Design Mode
-toggle.addEventListener('click', () => {
-    toggle.classList.toggle('active');
-    body.classList.toggle('dark-mode');
-});
-
+	// Format Time
+	const hours = now.getHours().toString().padStart(2, '0');
+	const minutes = now.getMinutes().toString().padStart(2, '0');
+	const seconds = now.getSeconds().toString().padStart(2, '0');
+	const milliseconds = now.getMilliseconds().toString().padStart(3, '0');
+	
+	let result;
+	if ('undefined' !== format) {
+		switch(format) {
+			case 'y'	: result = now.getFullYear();
+				break;
+			case 'm'	: result = now.getMonth();
+				break;
+			case 'month': result = month;
+				break;
+			case 'd'	: result = now.getDate();
+				break;
+			case 'day'	: result = weekday[now.getDay()];
+				break;
+			case 'Y-m-d': result = `${now.getFullYear()}-{now.getMonth()}-{now.getDate()}`;
+				break;
+			case 'ddMY'	: result = `${weekday[now.getDay()]}, ${now.getDate()} ${month} ${now.getFullYear()}`;
+				break;
+			case 'hours': result = hours;
+				break;
+			case 'min'	: result = minutes;
+				break;
+			case 'sec'	: result = seconds;
+				break;
+			case 'ms'	: result = milliseconds;
+		}
+	}
+	
+	return result;
+}
 
 // Function Clock
 function updateClock() {
-    const now = new Date();
-    const options = { day: 'numeric', month: 'long', year: 'numeric' };
-
-    // Format date
-    const date = now.toLocaleDateString('en-GB', options);
-    
-    // Format time
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const seconds = now.getSeconds().toString().padStart(2, '0');
-    const milliseconds = now.getMilliseconds().toString().padStart(3, '0'); // Get milliseconds
-
     // Update clock
     const clockElement = document.getElementById('clock');
-    clockElement.innerHTML = `${date} <span class="floating">${hours}</span>:<span class="floating">${minutes}</span>:<span class="floating">${seconds}</span>:${milliseconds}`;
+    clockElement.innerHTML = `${getDate('ddMY')} [ <span class="floating">${getDate('hours')}</span>:<span class="floating">${getDate('min')}</span>:<span class="floating">${getDate('sec')}</span>:<span class="floating">${getDate('ms')}</span> ]`;
 }
 
 // Update clock every 100 milliseconds
 setInterval(updateClock, 100);
 updateClock(); // Initial call to display clock immediately
+
+// Create Copy Elements
+const copyElm = createMultipleElements([
+	{
+		// Create Copy
+		tag: 'div',
+		attributes: {
+			'id'	: 'copy',
+			'class'	: 'copy'
+		},
+		text: `<a href="https://incodiy.com/" target="_blank">incoDIY</a> &copy; ${getDate('month')} ${getDate('y')}`
+	}
+]);
+// Draw Buttons
+copyElm.forEach(copyElm => insertNewElement('info-box', copyElm));
+
+// Function to set the height of the section to match the document height
+function setSectionHeight() {
+    const section = document.querySelector('.container');
+	let docHeight = parseInt(document.documentElement.scrollHeight - 70);
+    if (section) section.style.minHeight = `${docHeight}px`;
+}
+// Set the initial height on page load
+setSectionHeight();
